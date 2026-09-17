@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#150912" />
+<title>For My Love</title>
+<meta name="description" content="A private little world, made for one person." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐼</text></svg>" />
+</head>
+
+<body class="is-locked">
+
+<canvas id="dust" aria-hidden="true"></canvas>
+
+<!-- ============================================================
+     1. LOCK SCREEN
+============================================================ -->
+<section id="lock" aria-label="Unlock">
+  <div class="lock-card">
+    <div class="lock-panda" aria-hidden="true">🐼</div>
+    <h1 class="lock-title">There is something here<br /><em>for you</em></h1>
+    <p class="lock-sub">Only one person in the world has the key.</p>
+
+    <form id="lockForm" novalidate>
+      <label for="keyInput">Type your birthday to open it</label>
+      <input
+        id="keyInput"
+        type="text"
+        inputmode="numeric"
+        autocomplete="off"
+        spellcheck="false"
+        maxlength="10"
+        placeholder="DD.MM.YYYY"
+        aria-describedby="lockError"
+      />
+      <button type="submit" class="btn btn-solid">Open it</button>
+      <p id="lockError" class="lock-error" role="alert" hidden>
+        That's not the date. Try the one I could never forget.
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. THE 19 → 20 REVEAL
+============================================================ -->
+<div id="reveal" class="reveal" hidden aria-hidden="true">
+  <div class="reveal-glow"></div>
+  <div class="reveal-stage">
+    <span class="reveal-num" id="revealOld">19</span>
+    <span class="reveal-num reveal-new" id="revealNew">20</span>
+  </div>
+  <p class="reveal-line" id="revealLine">Happy birthday, my love</p>
+  <button class="reveal-skip" id="revealSkip" type="button">Skip</button>
+</div>
+
+<!-- ============================================================
+     3. THE SITE
+============================================================ -->
+<div id="app" hidden>
+
+  <header class="topbar">
+    <a class="brand" href="#" data-go="home"><span aria-hidden="true">🐼</span> Our world</a>
+    <button id="musicBtn" class="music-btn" type="button" aria-pressed="false" title="Music">
+      <span class="music-icon" aria-hidden="true"></span>
+      <span class="music-label">Music</span>
+    </button>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <button class="tab is-active" data-go="home">Home</button>
+    <button class="tab" data-go="story">Our story</button>
+    <button class="tab" data-go="gallery">You</button>
+    <button class="tab" data-go="videos">Videos</button>
+    <button class="tab" data-go="letter">My letter</button>
+    <button class="tab" data-go="games">Games</button>
+  </nav>
+
+  <main>
+
+    <!-- ---------- HOME ---------- -->
+    <section class="view is-active" id="view-home">
+      <div class="hero">
+        <figure class="hero-photo">
+          <img src="assets/us-together.jpg" alt="The two of us" />
+        </figure>
+
+        <div class="hero-words">
+          <p class="hero-date" id="heroDate">29 September</p>
+          <h1 class="hero-title">Happy birthday,<br /><em>my beautiful girl</em></h1>
+          <p class="hero-text" id="heroText">
+            I built this so you have one place that is only yours, where
+            nothing is rushed and nobody else is invited.
+          </p>
+          <button class="btn btn-solid" data-go="letter">Read my letter</button>
+        </div>
+      </div>
+
+      <div class="panels">
+        <div class="panel panel-count">
+          <p class="panel-label" id="countLabel">Until your birthday</p>
+          <div class="clock" id="clock">
+            <div><strong id="cDays">00</strong><span>days</span></div>
+            <div><strong id="cHours">00</strong><span>hours</span></div>
+            <div><strong id="cMin">00</strong><span>minutes</span></div>
+            <div><strong id="cSec">00</strong><span>seconds</span></div>
+          </div>
+        </div>
+
+        <div class="panel panel-together">
+          <p class="panel-label">Together since 31 July 2022</p>
+          <p class="big-number"><span id="daysTogether">0</span></p>
+          <p class="panel-foot">days of us — and I would do all of them again</p>
+        </div>
+      </div>
+
+      <div class="panda-zone">
+        <div class="panda" id="panda" role="button" tabindex="0" aria-label="Hug the panda">
+          <span class="panda-ear left"></span>
+          <span class="panda-ear right"></span>
+          <span class="panda-face">
+            <span class="panda-eye left"><i></i></span>
+            <span class="panda-eye right"><i></i></span>
+            <span class="panda-nose"></span>
+            <span class="panda-mouth"></span>
+            <span class="panda-blush left"></span>
+            <span class="panda-blush right"></span>
+          </span>
+          <span class="panda-arm left"></span>
+          <span class="panda-arm right"></span>
+          <span class="panda-heart">♥</span>
+        </div>
+        <p class="panda-hint" id="pandaHint">Tap me</p>
+      </div>
+    </section>
+
+    <!-- ---------- STORY ---------- -->
+    <section class="view" id="view-story">
+      <div class="view-head">
+        <h2>Our story</h2>
+        <p>Three moments I keep going back to.</p>
+      </div>
+
+      <ol class="timeline">
+        <li>
+          <h3>31 July 2022, 22:52</h3>
+          <p>
+            The night everything started. You called it your beautiful day.
+            I still have the message.
+          </p>
+          <figure class="shot shot-wide">
+            <img src="assets/first-day.jpg" alt="The message from 31 July 2022" loading="lazy" />
+          </figure>
+        </li>
+        <li>
+          <h3>All the ordinary nights</h3>
+          <p>
+            Not the big days — the small ones. Late messages, voice notes,
+            "go to sleep", "call me when you wake up". That is where we
+            actually happened.
+          </p>
+          <figure class="shot">
+            <img src="assets/our-chat.jpg" alt="One of our late night chats" loading="lazy" />
+          </figure>
+        </li>
+        <li>
+          <h3>Today</h3>
+          <p>
+            After everything, the good and the hard, you are still the person
+            I want next to me. Four years from now I want to be reading this
+            page with you.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ---------- GALLERY ---------- -->
+    <section class="view" id="view-gallery">
+      <div class="view-head">
+        <h2>My favourite pictures of you</h2>
+        <p>Tap any one to see it properly.</p>
+      </div>
+
+      <div class="grid" id="grid">
+        <button class="cell" data-full="assets/us-together.jpg"><img src="assets/us-together.jpg" alt="Us together" loading="lazy" /></button>
+        <button class="cell" data-full="assets/memory-01.jpg"><img src="assets/memory-01.jpg" alt="You in the mirror" loading="lazy" /></button>
+        <button class="cell" data-full="assets/memory-02.jpg"><img src="assets/memory-02.jpg" alt="Four of you at once" loading="lazy" /></button>
+        <button class="cell" data-full="assets/memory-03.jpg"><img src="assets/memory-03.jpg" alt="Sunlight on you" loading="lazy" /></button>
+        <button class="cell" data-full="assets/memory-04.jpg"><img src="assets/memory-04.jpg" alt="The glasses filter" loading="lazy" /></button>
+        <button class="cell" data-full="assets/memory-05.jpg"><img src="assets/memory-05.jpg" alt="Singing" loading="lazy" /></button>
+        <button class="cell" data-full="assets/memory-06.jpg"><img src="assets/memory-06.jpg" alt="Be your best" loading="lazy" /></button>
+        <button class="cell" data-full="assets/memory-07.jpg"><img src="assets/memory-07.jpg" alt="Blowing a kiss" loading="lazy" /></button>
+        <button class="cell" data-full="assets/memory-08.jpg"><img src="assets/memory-08.jpg" alt="Close up" loading="lazy" /></button>
+      </div>
+    </section>
+
+    <!-- ---------- VIDEOS ---------- -->
+    <section class="view" id="view-videos">
+      <div class="view-head">
+        <h2>Moments that move</h2>
+        <p>Sound on. The music pauses while a video plays.</p>
+      </div>
+
+      <div class="videos">
+        <figure>
+          <video controls preload="metadata" playsinline poster="">
+            <source src="assets/video-01.mp4" type="video/mp4" />
+          </video>
+          <figcaption>I watch this one more often than you think</figcaption>
+        </figure>
+        <figure>
+          <video controls preload="metadata" playsinline>
+            <source src="assets/video-02.mp4" type="video/mp4" />
+          </video>
+          <figcaption>And this one when I miss you</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ---------- LETTER ---------- -->
+    <section class="view" id="view-letter">
+      <div class="view-head">
+        <h2>My letter</h2>
+        <p>Take your time. It is long because you are worth the words.</p>
+      </div>
+
+      <article class="letter">
+        <p class="letter-open">My love,</p>
+
+        <p>
+          I have been thinking a lot about us, about everything we have been
+          through, and especially about the moments where I made you feel alone
+          even though you had me. Loving someone is not only about having
+          feelings for them in your heart. It is also about making that person
+          feel loved, wanted, appreciated, heard and safe. There were times when
+          I failed to give you that, and for that I am truly sorry.
+        </p>
+
+        <p>
+          I never wanted you to question your place in my life. I never wanted
+          you sitting there wondering why I was not calling, why I was not
+          giving you attention, or why I seemed distant. My actions sometimes
+          made you feel like you were asking for too much, when you were only
+          asking for the love you deserved from the person you love.
+        </p>
+
+        <div class="letter-more" id="letterMore" hidden>
+          <p>
+            I am sorry for every moment you needed me and I was not there in the
+            way you needed. I am sorry for every conversation where you wanted
+            to feel close to me and felt distance instead. I am sorry for the
+            times my silence made you overthink. You should never have had to
+            wonder whether you were important to me.
+          </p>
+
+          <p>
+            The truth is that you are important to me in ways I struggle to
+            explain. You are not just someone I love. You became part of my
+            everyday life, my thoughts and my future. So many small things
+            remind me of you — I see something and immediately think, I wish she
+            was here so I could show her this.
+          </p>
+
+          <p>
+            I know life gets heavy. Some days my head is full of things I have
+            to solve and I disconnect from everything around me. I do not want
+            to use that as an excuse for hurting you. Being tired does not make
+            your feelings less important. Being busy does not mean I should stop
+            showing you that you matter.
+          </p>
+
+          <p>
+            And I understand something now that I should have understood
+            earlier: you cannot see what is inside my heart. I can love you
+            deeply, but if I do not call, do not talk to you, do not check on
+            you, how are you supposed to feel it? I cannot expect you to read my
+            mind. I have to show you.
+          </p>
+
+          <p class="letter-beat">That is what I want to change.</p>
+
+          <p>
+            Not another beautiful paragraph full of promises, and then the same
+            behaviour a week later. I want my actions to speak louder than my
+            words. I want you to notice the difference without me having to
+            point at it. I want to call you because hearing your voice makes me
+            happy, not because I am afraid you will be upset. I want to listen
+            when something is bothering you instead of defending myself.
+          </p>
+
+          <p>
+            I want to know what makes you feel loved. What makes you feel safe
+            with me. The little things that make you smile and the ones that
+            quietly hurt you. When you need me to talk, when you need me to
+            listen, and when you just need to feel that someone is beside you.
+          </p>
+
+          <p>
+            I cannot erase what already happened. But I can take responsibility
+            for it, learn from it, and make sure the lesson actually changes how
+            I treat you. I do not expect you to trust every promise
+            immediately. If I damaged something, rebuilding it takes time, and I
+            would rather prove myself patiently than push you into believing
+            words I have not earned yet.
+          </p>
+
+          <p>
+            I want us to build something better than what we had. New memories
+            stronger than the painful ones. Laughing at stupid things again,
+            staying up talking about everything and nothing, making plans,
+            celebrating each other.
+          </p>
+
+          <p class="letter-beat">
+            I do not want a relationship where two people say they love each
+            other. I want one where two people actually feel loved.
+          </p>
+
+          <p>
+            When I have been distant, it was never because I stopped caring.
+            Never because you became less beautiful to me or less worthy of my
+            love. You are not what I am trying to escape. You are the person I
+            want beside me while I figure my life out.
+          </p>
+
+          <p>
+            When I think about a better life one day, I do not only think about
+            money or work. I think about having someone beside me to share it
+            with. Someone who knows where I started, who remembers the hard
+            days. That person is you.
+          </p>
+
+          <p>
+            So please accept my apology — for the pain I caused, for the moments
+            I was absent, for every time my actions made you question my
+            feelings. I love you. Not only when we are happy. Also through the
+            difficult conversations, the misunderstandings, the quiet days.
+          </p>
+
+          <p>
+            I do not want to just tell you that you are my favourite person. I
+            want to treat you like it.
+          </p>
+
+          <p class="letter-close">
+            My beautiful girl.<br />
+            My favourite person.<br />
+            My peace. My happiness. My future.<br />
+            <span>Forever yours, your husband 🐼❤️</span>
+          </p>
+        </div>
+
+        <button class="btn btn-ghost" id="letterToggle" type="button">
+          Keep reading
+        </button>
+      </article>
+    </section>
+
+    <!-- ---------- GAMES ---------- -->
+    <section class="view" id="view-games">
+      <div class="view-head">
+        <h2>Two small games</h2>
+        <p>One tests your memory. One is just silly.</p>
+      </div>
+
+      <div class="quiz" id="quiz">
+        <p class="quiz-progress" id="quizProgress">Question 1 of 4</p>
+        <h3 class="quiz-q" id="quizQ">—</h3>
+        <div class="quiz-options" id="quizOptions"></div>
+        <p class="quiz-feedback" id="quizFeedback" role="status"></p>
+        <button class="btn btn-ghost" id="quizNext" type="button" hidden>Next</button>
+      </div>
+
+      <div class="clicker">
+        <h3>Catch the hearts</h3>
+        <p id="clickerHint">Ten seconds. Tap as many as you can.</p>
+        <button class="clicker-btn" id="clickerBtn" type="button">♥</button>
+        <p class="clicker-score">
+          <strong id="clickerScore">0</strong>
+          <span id="clickerBest"></span>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <p>Made by hand, for one person.</p>
+    <p>31.07.2022 — forever</p>
+  </footer>
+</div>
+
+<!-- ============================================================
+     4. LIGHTBOX
+============================================================ -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close">×</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous">‹</button>
+  <img id="lbImg" src="" alt="" />
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next">›</button>
+</div>
+
+<audio id="song" loop preload="none">
+  <source src="assets/song.mp4" type="audio/mp4" />
+</audio>
+
+<script src="script.js"></script>
+</body>
+</html>
